@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hidden Things</title>
+
+  <!-- ===== 폰트 불러오기 =====
+       영문: IBM Plex Mono (Regular)
+       한글: D2Coding (Regular)
+       인터넷에 연결되어 있어야 폰트가 보입니다. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/gh/wan2land/d2coding/d2coding.css" rel="stylesheet">
+
+  <!-- ===== 스타일 파일 ===== -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- =====================================================
+         1. 헤더 (제목 + 스테이지 표시)
+         ===================================================== -->
+    <header class="header">
+      <h1 class="header__title">Hidden Things</h1>
+
+      <!-- 스테이지 표시: 채워진 네모가 현재 스테이지까지의 진행도 -->
+      <div class="stage-indicator">
+        <span class="stage-indicator__label">Stage</span>
+        <ol class="stage-indicator__list" id="stageList">
+          <li class="stage-box"></li>
+          <li class="stage-box"></li>
+          <li class="stage-box"></li>
+          <li class="stage-box"></li>
+          <li class="stage-box"></li>
+        </ol>
+      </div>
+    </header>
+
+    <!-- =====================================================
+         2. 게임 영역 (타이머 + 이미지 영역)
+         Game Over 때 이 영역에만 블러 효과가 적용됩니다.
+         ===================================================== -->
+    <main class="game" id="game">
+
+      <div class="game__body" id="gameBody">
+
+        <!-- 2-1. 타이머 바 -->
+        <section class="timer">
+          <p class="timer__label">Time</p>
+          <div class="timer__bar">
+            <div class="timer__fill" id="timerFill"></div>
+          </div>
+        </section>
+
+        <!-- 2-2. 이미지 영역 (비율 1352:756) -->
+        <section class="canvas" id="canvas">
+
+          <!-- 시작 화면: 점 패턴 배경 + Start 버튼 -->
+          <div class="canvas__start" id="startScreen">
+            <button type="button" class="btn-start" id="startBtn">Start</button>
+          </div>
+
+          <!-- 스테이지 이미지 (JS가 스테이지마다 교체) -->
+          <img class="canvas__image" id="stageImage" src="images/stage1.jpg" alt="" hidden>
+
+          <!-- 드래그로 만든 주황색 박스가 이 안에 쌓입니다 -->
+          <div class="canvas__boxes" id="boxLayer"></div>
+
+          <!-- 안내 문구 (좌측 상단) -->
+          <p class="canvas__prompt" id="prompt" hidden></p>
+
+          <!-- Submit 버튼 (우측 하단) -->
+          <button type="button" class="btn-submit" id="submitBtn" hidden>Submit</button>
+        </section>
+      </div>
+
+      <!-- =====================================================
+           3. Game Over 팝업
+           ===================================================== -->
+      <div class="gameover" id="gameOver" hidden>
+        <div class="gameover__box">
+          <p class="gameover__title">Game Over</p>
+          <p class="gameover__text">Scroll Down to see the result</p>
+          <svg class="gameover__arrow" viewBox="0 0 48 52" aria-hidden="true">
+            <polyline points="1,2 24,20 47,2"></polyline>
+            <polyline points="1,17 24,35 47,17"></polyline>
+            <polyline points="1,32 24,50 47,32"></polyline>
+          </svg>
+        </div>
+      </div>
+    </main>
+
+    <!-- =====================================================
+         4. 결과 영역 (Game Over 이후 스크롤하면 보이는 곳)
+         데이터 주석 노동자의 노동 환경 콘텐츠를 여기에 넣으세요.
+         ===================================================== -->
+    <section class="result" id="result" hidden>
+      <h2 class="result__title">Result</h2>
+
+      <!-- ↓↓↓ 이 아래에 정보 콘텐츠(글, 이미지 등)를 추가하세요 ↓↓↓ -->
+      <div class="result__content" id="resultContent">
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ===== 게임 동작 파일 =====
+       드래그/타이머/스테이지 전환은 CSS만으로 불가능해서 JS 파일이 필요합니다. -->
+  <script src="js/script.js"></script>
+</body>
+</html>
